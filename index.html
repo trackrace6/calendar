@@ -1,313 +1,384 @@
-<!-- CALENDRIER RACING & AVIATION 2026 — WordPress Ready -->
-<!-- Coller ce bloc dans un widget "HTML personnalisé" dans Gutenberg -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Racing &amp; Aviation — Calendar 2026</title>
 <style>
-#cal-racing-2026 *{box-sizing:border-box;margin:0;padding:0}
-#cal-racing-2026{font-family:Arial,Helvetica,sans-serif;overflow-x:auto;width:100%;padding-bottom:12px}
-#cal-racing-2026 table{border-collapse:collapse;min-width:900px;width:100%;table-layout:fixed}
-#cal-racing-2026 th,#cal-racing-2026 td{border:1px solid rgba(255,255,255,0.18);vertical-align:top;padding:0}
-#cal-racing-2026 .th-year{background:#1a3a5c;color:#fff;font-size:13px;font-weight:700;text-align:center;padding:8px 4px;width:76px;vertical-align:middle}
-#cal-racing-2026 .th-month{background:#2a5298;color:#fff;font-size:13px;font-weight:700;text-align:center;padding:6px 4px}
-#cal-racing-2026 .th-week{background:#3a6bbf;color:#e0ecff;font-size:11px;font-weight:400;text-align:center;padding:4px 2px;width:62px}
-#cal-racing-2026 .row-label{background:#1a3a5c;color:#fff;font-size:10px;font-weight:700;text-align:center;padding:6px 4px;vertical-align:middle;line-height:1.3}
-#cal-racing-2026 .cell-game{background:#b8d4f0;min-height:68px;padding:5px;position:relative}
-#cal-racing-2026 .cell-event{background:#5a8fc2;min-height:44px;padding:4px;vertical-align:middle}
-#cal-racing-2026 .cell-f1{background:#e8002d;min-height:48px;padding:4px}
-#cal-racing-2026 .cell-wec{background:#00294d;min-height:48px;padding:4px}
-#cal-racing-2026 .cell-wrc{background:#ff6600;min-height:48px;padding:4px}
-#cal-racing-2026 .cell-empty-game{background:#b8d4f0;min-height:68px}
-#cal-racing-2026 .cell-empty-event{background:#5a8fc2;min-height:44px}
-#cal-racing-2026 .cell-empty-f1{background:#e8002d;min-height:48px}
-#cal-racing-2026 .cell-empty-wec{background:#00294d;min-height:48px}
-#cal-racing-2026 .cell-empty-wrc{background:#ff6600;min-height:48px}
-#cal-racing-2026 .race-item{font-size:10px;color:#fff;line-height:1.35;margin-bottom:3px;padding:0 2px}
-#cal-racing-2026 .race-item b{font-weight:700}
-#cal-racing-2026 .game-chip{display:inline-block;cursor:pointer;position:relative;vertical-align:top}
-#cal-racing-2026 .game-box{width:54px;height:54px;border-radius:5px;border:2px solid rgba(255,255,255,0.5);background:#3a6bbf;display:flex;align-items:center;justify-content:center;font-size:7px;color:#cde;text-align:center;padding:3px;line-height:1.25;font-weight:700;letter-spacing:0.02em;transition:border-color 0.15s}
-#cal-racing-2026 .game-chip:hover .game-box{border-color:#fff;border-width:2px}
-#cal-racing-2026 .game-date{font-size:9px;color:#0d2540;text-align:center;margin-top:3px;font-weight:600}
-#cal-racing-2026 .plats{display:flex;gap:2px;justify-content:center;margin-top:2px;flex-wrap:wrap}
-#cal-racing-2026 .plat{font-size:7px;background:rgba(10,30,60,0.25);color:#0d2540;padding:1px 3px;border-radius:2px;font-weight:700}
-#cal-racing-2026 .event-box{font-size:10px;color:#fff;font-weight:600;text-align:center;padding:4px 3px;line-height:1.3}
-#cal-racing-2026 .event-sub{font-size:9px;color:#c8e0ff;font-weight:400;margin-top:1px}
-
-/* TOOLTIP */
-#cal-racing-2026 .tt{
-  display:none;
-  position:absolute;
-  z-index:9999;
-  background:#0d2540;
-  color:#e8f4ff;
-  border:1px solid rgba(100,160,255,0.35);
-  border-radius:8px;
-  padding:10px 13px;
-  width:210px;
-  font-size:11px;
-  line-height:1.55;
-  top:62px;
-  left:50%;
-  transform:translateX(-50%);
-  pointer-events:none;
-  box-shadow:0 4px 16px rgba(0,0,0,0.4)
-}
-#cal-racing-2026 .tt::before{
-  content:'';
-  position:absolute;
-  top:-6px;left:50%;transform:translateX(-50%);
-  border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:6px solid #0d2540
-}
-#cal-racing-2026 .tt b{color:#fff;font-size:12px;display:block;margin-bottom:3px}
-#cal-racing-2026 .tt-date{color:#7ab3e0;font-size:10px;display:block;margin-bottom:5px}
-#cal-racing-2026 .tt-desc{color:#c8dcf0;font-size:11px;line-height:1.5}
-#cal-racing-2026 .tt-plat{color:#7ab3e0;font-size:10px;margin-top:6px;display:block}
-#cal-racing-2026 .tt-genre{display:inline-block;background:rgba(255,255,255,0.1);padding:2px 7px;border-radius:10px;font-size:9px;margin-top:5px;color:#aad0f0}
-#cal-racing-2026 .game-chip:hover .tt{display:block}
-
-/* LEGENDE */
-#cal-racing-2026 .legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;padding:0 2px}
-#cal-racing-2026 .leg{display:flex;align-items:center;gap:5px;font-size:11px;color:#444}
-#cal-racing-2026 .leg-dot{width:12px;height:12px;border-radius:2px;flex-shrink:0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f5f5f5;padding:16px;color:#222}
+h1{font-size:18px;font-weight:600;color:#1a1a2e;margin-bottom:14px;letter-spacing:0.03em}
+#cal{overflow-x:auto;width:100%;border-radius:6px;box-shadow:0 1px 6px rgba(0,0,0,0.12)}
+table{border-collapse:collapse;width:100%;min-width:2600px;table-layout:fixed;background:#fff}
+th,td{border:1px solid #ddd;padding:0;vertical-align:top}
+.th-year{background:#1a1a2e;color:#fff;font-size:13px;font-weight:700;text-align:center;padding:8px 4px;vertical-align:middle;width:70px}
+.th-month{background:#2c3e6b;color:#fff;font-size:12px;font-weight:600;text-align:center;padding:5px 2px}
+.th-week{background:#3d5199;color:#c8d4f0;font-size:10px;font-weight:600;text-align:center;padding:3px 2px;width:55px}
+.th-date{background:#4a5fa8;color:#b8c8e8;font-size:9px;text-align:center;padding:2px;border-color:#5570b8}
+.rl{background:#1a1a2e;color:#c8c8d8;font-size:9px;font-weight:700;text-align:center;padding:5px 3px;vertical-align:middle;line-height:1.4;width:70px}
+.rl span{font-size:8px;font-weight:400;opacity:0.7;display:block;margin-top:2px}
+.cg{background:#f0f4fa;padding:4px;vertical-align:top;position:relative}
+.cg0{background:#f0f4fa}
+.ce{background:#e8f0fa;padding:3px;vertical-align:middle;text-align:center}
+.ce0{background:#e8f0fa}
+.cf{background:#fff5f5;padding:3px;vertical-align:top}
+.cf0{background:#fff5f5}
+.cw{background:#f0f4ff;padding:3px;vertical-align:top}
+.cw0{background:#f0f4ff}
+.cr{background:#fff8f0;padding:3px;vertical-align:top}
+.cr0{background:#fff8f0}
+.ri{font-size:9px;color:#333;line-height:1.4;margin-bottom:2px}
+.ri b{font-weight:700}
+.ev{font-size:9px;font-weight:600;color:#2c3e6b;line-height:1.3}
+.evs{font-size:8px;color:#5570b8;margin-top:1px;line-height:1.3}
+.past{opacity:0.5;filter:grayscale(0.3)}
+.chip{display:inline-block;vertical-align:top;position:relative;margin:1px;cursor:default}
+.chip-img{width:58px;height:58px;border-radius:4px;border:1.5px solid #ccc;object-fit:cover;display:block;background:#ddd;transition:border-color 0.15s}
+.chip-fallback{width:58px;height:58px;border-radius:4px;border:1.5px solid #bbb;display:flex;align-items:center;justify-content:center;font-size:7px;color:#555;text-align:center;padding:3px;line-height:1.3;font-weight:600;background:#dde4f0}
+.chip:hover .chip-img,.chip:hover .chip-fallback{border-color:#2c3e6b;border-width:2px}
+.plats{display:flex;gap:2px;justify-content:center;margin-top:2px;flex-wrap:wrap}
+.plat{font-size:6px;background:#d8e4f8;color:#2c3e6b;padding:1px 3px;border-radius:2px;font-weight:700}
+.chip-date{font-size:8px;color:#444;text-align:center;margin-top:2px;font-weight:600}
+.tip{display:none;position:absolute;z-index:9999;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#1a1a2e;color:#e8ecf8;border:1px solid #3d5199;border-radius:7px;padding:10px 12px;width:200px;font-size:10px;line-height:1.5;pointer-events:none;white-space:normal}
+.tip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#1a1a2e}
+.tip-title{color:#fff;font-size:11px;font-weight:700;display:block;margin-bottom:2px}
+.tip-date{color:#7a9ad0;font-size:9px;display:block;margin-bottom:5px}
+.tip-desc{color:#b8c8e8;font-size:9px;line-height:1.5;display:block}
+.tip-plat{color:#7a9ad0;font-size:9px;margin-top:5px;display:block}
+.tip-genre{display:inline-block;background:rgba(255,255,255,0.08);padding:1px 6px;border-radius:8px;font-size:8px;margin-top:4px;color:#9ab8d8}
+.chip:hover .tip{display:block}
+.tl .tip{left:auto;right:0;transform:none}
+.tl .tip::after{left:auto;right:14px;transform:none}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.leg{display:flex;align-items:center;gap:5px;font-size:10px;color:#555}
+.ld{width:12px;height:12px;border-radius:2px}
+.leg-hint{margin-left:auto;font-size:10px;color:#888;font-style:italic}
 </style>
-
-<div id="cal-racing-2026">
+</head>
+<body>
+<h1>Racing &amp; Aviation Games — Calendar 2026</h1>
+<div id="cal">
 <table>
 <colgroup>
-  <col style="width:76px">
-  <col style="width:62px"><col style="width:62px"><col style="width:62px"><col style="width:62px">
-  <col style="width:62px"><col style="width:62px"><col style="width:62px"><col style="width:62px"><col style="width:62px">
-  <col style="width:62px"><col style="width:62px"><col style="width:62px"><col style="width:62px">
+  <col style="width:70px">
+  <col style="width:55px"><col style="width:55px"><col style="width:55px"><col style="width:55px">
+  <col style="width:55px"><col style="width:55px"><col style="width:55px"><col style="width:55px">
+  <col style="width:55px"><col style="width:55px"><col style="width:55px"><col style="width:55px">
+  <col style="width:55px"><col style="width:55px"><col style="width:55px"><col style="width:55px">
+  <col style="width:55px"><col style="width:55px"><col style="width:55px"><col style="width:55px">
+  <col style="width:55px"><col style="width:55px"><col style="width:55px"><col style="width:55px">
+  <col style="width:55px"><col style="width:55px"><col style="width:55px"><col style="width:55px">
+  <col style="width:55px"><col style="width:55px"><col style="width:55px">
+  <col style="width:55px"><col style="width:55px"><col style="width:55px"><col style="width:55px">
+  <col style="width:55px"><col style="width:55px"><col style="width:55px"><col style="width:55px">
+  <col style="width:55px"><col style="width:55px"><col style="width:55px"><col style="width:55px">
+  <col style="width:55px"><col style="width:55px"><col style="width:55px"><col style="width:55px">
+  <col style="width:55px"><col style="width:55px"><col style="width:55px">
 </colgroup>
 <thead>
-  <tr>
-    <th class="th-year" rowspan="2">2026</th>
-    <th class="th-month" colspan="4">Avril</th>
-    <th class="th-month" colspan="5">Mai</th>
-    <th class="th-month" colspan="4">Juin</th>
-  </tr>
-  <tr>
-    <th class="th-week">W15</th><th class="th-week">W16</th><th class="th-week">W17</th><th class="th-week">W17</th>
-    <th class="th-week">W18</th><th class="th-week">W19</th><th class="th-week">W20</th><th class="th-week">W21</th><th class="th-week">W22</th>
-    <th class="th-week">W23</th><th class="th-week">W24</th><th class="th-week">W25</th><th class="th-week">W26</th>
-  </tr>
-  <tr>
-    <td class="row-label" style="background:#1a3a5c;color:#9ab8d8;font-size:9px;padding:3px 2px;text-align:center;border:1px solid rgba(255,255,255,0.1)">semaine du</td>
-    <td style="background:#3a6bbf;color:#c8dcff;font-size:9px;text-align:center;padding:2px;border:1px solid rgba(255,255,255,0.1)">6 avr.</td>
-    <td style="background:#3a6bbf;color:#c8dcff;font-size:9px;text-align:center;padding:2px;border:1px solid rgba(255,255,255,0.1)">13 avr.</td>
-    <td style="background:#3a6bbf;color:#c8dcff;font-size:9px;text-align:center;padding:2px;border:1px solid rgba(255,255,255,0.1)">20 avr.</td>
-    <td style="background:#3a6bbf;color:#c8dcff;font-size:9px;text-align:center;padding:2px;border:1px solid rgba(255,255,255,0.1)">27 avr.</td>
-    <td style="background:#3a6bbf;color:#c8dcff;font-size:9px;text-align:center;padding:2px;border:1px solid rgba(255,255,255,0.1)">4 mai</td>
-    <td style="background:#3a6bbf;color:#c8dcff;font-size:9px;text-align:center;padding:2px;border:1px solid rgba(255,255,255,0.1)">11 mai</td>
-    <td style="background:#3a6bbf;color:#c8dcff;font-size:9px;text-align:center;padding:2px;border:1px solid rgba(255,255,255,0.1)">18 mai</td>
-    <td style="background:#3a6bbf;color:#c8dcff;font-size:9px;text-align:center;padding:2px;border:1px solid rgba(255,255,255,0.1)">25 mai</td>
-    <td style="background:#3a6bbf;color:#c8dcff;font-size:9px;text-align:center;padding:2px;border:1px solid rgba(255,255,255,0.1)">1 juin</td>
-    <td style="background:#3a6bbf;color:#c8dcff;font-size:9px;text-align:center;padding:2px;border:1px solid rgba(255,255,255,0.1)">8 juin</td>
-    <td style="background:#3a6bbf;color:#c8dcff;font-size:9px;text-align:center;padding:2px;border:1px solid rgba(255,255,255,0.1)">15 juin</td>
-    <td style="background:#3a6bbf;color:#c8dcff;font-size:9px;text-align:center;padding:2px;border:1px solid rgba(255,255,255,0.1)">22 juin</td>
-  </tr>
+<tr>
+  <th class="th-year" rowspan="3">2026</th>
+  <th class="th-month" colspan="4">Janvier</th>
+  <th class="th-month" colspan="4">Février</th>
+  <th class="th-month" colspan="4">Mars</th>
+  <th class="th-month" colspan="4">Avril</th>
+  <th class="th-month" colspan="4">Mai</th>
+  <th class="th-month" colspan="4">Juin</th>
+  <th class="th-month" colspan="4">Juillet</th>
+  <th class="th-month" colspan="3">Août</th>
+  <th class="th-month" colspan="4">Septembre</th>
+  <th class="th-month" colspan="4">Octobre</th>
+  <th class="th-month" colspan="4">Novembre</th>
+  <th class="th-month" colspan="3">Décembre</th>
+</tr>
+<tr>
+  <th class="th-week">W1</th><th class="th-week">W2</th><th class="th-week">W3</th><th class="th-week">W4</th>
+  <th class="th-week">W5</th><th class="th-week">W6</th><th class="th-week">W7</th><th class="th-week">W8</th>
+  <th class="th-week">W9</th><th class="th-week">W10</th><th class="th-week">W11</th><th class="th-week">W12</th>
+  <th class="th-week">W13</th><th class="th-week">W14</th><th class="th-week">W15</th><th class="th-week">W16</th>
+  <th class="th-week">W17</th><th class="th-week">W18</th><th class="th-week">W19</th><th class="th-week">W20</th>
+  <th class="th-week">W21</th><th class="th-week">W22</th><th class="th-week">W23</th><th class="th-week">W24</th>
+  <th class="th-week">W25</th><th class="th-week">W26</th><th class="th-week">W27</th><th class="th-week">W28</th>
+  <th class="th-week">W29</th><th class="th-week">W30</th><th class="th-week">W31</th>
+  <th class="th-week">W32</th><th class="th-week">W33</th><th class="th-week">W34</th><th class="th-week">W35</th>
+  <th class="th-week">W36</th><th class="th-week">W37</th><th class="th-week">W38</th><th class="th-week">W39</th>
+  <th class="th-week">W40</th><th class="th-week">W41</th><th class="th-week">W42</th><th class="th-week">W43</th>
+  <th class="th-week">W44</th><th class="th-week">W45</th><th class="th-week">W46</th><th class="th-week">W47</th>
+  <th class="th-week">W48</th><th class="th-week">W49</th><th class="th-week">W50</th>
+</tr>
+<tr>
+  <td class="th-date">5/1</td><td class="th-date">12/1</td><td class="th-date">19/1</td><td class="th-date">26/1</td>
+  <td class="th-date">2/2</td><td class="th-date">9/2</td><td class="th-date">16/2</td><td class="th-date">23/2</td>
+  <td class="th-date">2/3</td><td class="th-date">9/3</td><td class="th-date">16/3</td><td class="th-date">23/3</td>
+  <td class="th-date">30/3</td><td class="th-date">6/4</td><td class="th-date">13/4</td><td class="th-date">20/4</td>
+  <td class="th-date">27/4</td><td class="th-date">4/5</td><td class="th-date">11/5</td><td class="th-date">18/5</td>
+  <td class="th-date">25/5</td><td class="th-date">1/6</td><td class="th-date">8/6</td><td class="th-date">15/6</td>
+  <td class="th-date">22/6</td><td class="th-date">29/6</td><td class="th-date">6/7</td><td class="th-date">13/7</td>
+  <td class="th-date">20/7</td><td class="th-date">27/7</td><td class="th-date">3/8</td>
+  <td class="th-date">10/8</td><td class="th-date">17/8</td><td class="th-date">24/8</td><td class="th-date">31/8</td>
+  <td class="th-date">7/9</td><td class="th-date">14/9</td><td class="th-date">21/9</td><td class="th-date">28/9</td>
+  <td class="th-date">5/10</td><td class="th-date">12/10</td><td class="th-date">19/10</td><td class="th-date">26/10</td>
+  <td class="th-date">2/11</td><td class="th-date">9/11</td><td class="th-date">16/11</td><td class="th-date">23/11</td>
+  <td class="th-date">30/11</td><td class="th-date">7/12</td><td class="th-date">14/12</td>
+</tr>
 </thead>
 <tbody>
 
-<!-- LIGNE 3 : GAME RELEASES -->
+<!-- ═══ GAMES RELEASES ═══ -->
 <tr>
-  <td class="row-label">GAMES<br>RELEASES</td>
-  <td class="cell-empty-game"></td>
-  <td class="cell-empty-game"></td>
-  <td class="cell-game">
-    <div class="game-chip">
-      <div class="game-box">BUS<br>BOUND</div>
-      <div class="plats"><span class="plat">PC</span><span class="plat">PS5</span><span class="plat">XSX</span></div>
-      <div class="game-date">30 avr.</div>
-      <div class="tt">
-        <b>Bus Bound</b>
-        <span class="tt-date">30 avril 2026</span>
-        <span class="tt-desc">Simulateur de conduite de bus en ville. Gérez vos lignes, respectez les horaires, transportez vos passagers.</span>
-        <span class="tt-plat">PC · PS5 · Xbox Series X/S</span>
-        <span class="tt-genre">Simulation conduite</span>
-      </div>
-    </div>
-  </td>
-  <td class="cell-empty-game"></td>
-  <td class="cell-empty-game"></td>
-  <td class="cell-empty-game"></td>
-  <td class="cell-game">
-    <div class="game-chip">
-      <div class="game-box">FORZA<br>HORIZON<br>6</div>
-      <div class="plats"><span class="plat">PC</span><span class="plat">PS5</span><span class="plat">XSX</span></div>
-      <div class="game-date">19 mai</div>
-      <div class="tt">
-        <b>Forza Horizon 6</b>
-        <span class="tt-date">19 mai 2026 (EA : 15 mai)</span>
-        <span class="tt-desc">Open world au Japon : Tokyo la nuit, cols de Gunma à l'aube. Le rêve JDM enfin exaucé par Playground Games.</span>
-        <span class="tt-plat">PC · PS5 · Xbox Series X/S</span>
-        <span class="tt-genre">Arcade Racing</span>
-      </div>
-    </div>
-  </td>
-  <td class="cell-game">
-    <div class="game-chip">
-      <div class="game-box">F1<br>25</div>
-      <div class="plats"><span class="plat">PC</span><span class="plat">PS5</span><span class="plat">XSX</span></div>
-      <div class="game-date">22 mai</div>
-      <div class="tt">
-        <b>F1 25</b>
-        <span class="tt-date">22 mai 2026</span>
-        <span class="tt-desc">Simulation officielle de Formule 1 par Codemasters / EA Sports. Physique affinée, nouveau moteur graphique et mode carrière enrichi.</span>
-        <span class="tt-plat">PC · PS5 · Xbox Series X/S</span>
-        <span class="tt-genre">Sim Racing</span>
-      </div>
-    </div>
-  </td>
-  <td class="cell-empty-game"></td>
-  <td class="cell-empty-game"></td>
-  <td class="cell-game">
-    <div class="game-chip">
-      <div class="game-box">SCREAMER</div>
-      <div class="plats"><span class="plat">PC</span><span class="plat">PS5</span><span class="plat">XSX</span></div>
-      <div class="game-date">Juin</div>
-      <div class="tt">
-        <b>Screamer</b>
-        <span class="tt-date">Juin 2026</span>
-        <span class="tt-desc">Reboot du racer arcade des 90s. Esthétique animée, conduite twin-stick driftée, capacités spéciales façon combat.</span>
-        <span class="tt-plat">PC · PS5 · Xbox Series X/S</span>
-        <span class="tt-genre">Arcade Racing</span>
-      </div>
-    </div>
-    <div class="game-chip" style="margin-left:2px">
-      <div class="game-box">TOKYO<br>XTREME<br>RACER</div>
-      <div class="plats"><span class="plat">PS5</span></div>
-      <div class="game-date">Juin</div>
-      <div class="tt" style="left:auto;right:0;transform:none">
-        <b>Tokyo Xtreme Racer</b>
-        <span class="tt-date">Juin 2026 (port PS5)</span>
-        <span class="tt-desc">Street racing nocturne sur les autoroutes surélevées de Tokyo. L'esprit des 90s entièrement réinventé.</span>
-        <span class="tt-plat">PS5</span>
-        <span class="tt-genre">Arcade Racing</span>
-      </div>
-    </div>
-  </td>
-  <td class="cell-game">
-    <div class="game-chip">
-      <div class="game-box">ACE<br>COMBAT<br>8</div>
-      <div class="plats"><span class="plat">PC</span><span class="plat">PS5</span><span class="plat">XSX</span></div>
-      <div class="game-date">TBA</div>
-      <div class="tt" style="left:auto;right:0;transform:none">
-        <b>Ace Combat 8: Wings of Theve</b>
-        <span class="tt-date">2026 — date TBA</span>
-        <span class="tt-desc">Premier Ace Combat sur Unreal Engine 5. Combats aériens intenses, porte-avions, campagne scénarisée et multijoueur.</span>
-        <span class="tt-plat">PC · PS5 · Xbox Series X/S</span>
-        <span class="tt-genre">Aviation / Combat</span>
-      </div>
-    </div>
-  </td>
-  <td class="cell-game">
-    <div class="game-chip">
-      <div class="game-box">STAR WARS GALACTIC RACER</div>
-      <div class="plats"><span class="plat">PC</span><span class="plat">PS5</span></div>
-      <div class="game-date">TBA</div>
-      <div class="tt" style="left:auto;right:0;transform:none">
-        <b>Star Wars: Galactic Racer</b>
-        <span class="tt-date">2026 — date TBA</span>
-        <span class="tt-desc">Reimagination du pod-racing dans l'Outer Rim. Ligues clandestines, véhicules iconiques et campagne solo.</span>
-        <span class="tt-plat">PC · PS5 · Xbox Series X/S</span>
-        <span class="tt-genre">Arcade Racing · Sci-Fi</span>
-      </div>
-    </div>
-  </td>
+<td class="rl">GAMES<span>Releases</span></td>
+<!-- W1 : AC EVO update -->
+<td class="cg past"><div class="chip"><div class="chip-fallback">AC EVO<br>Update</div><div class="plats"><span class="plat">PC</span></div><div class="chip-date">EA upd.</div><div class="tip"><span class="tip-title">Assetto Corsa EVO</span><span class="tip-date">Mises à jour EA — 2026</span><span class="tip-desc">Simulation référence autour du Nürburgring. Updates régulières en Early Access tout au long de 2026.</span><span class="tip-plat">PC (EA) · Consoles fin 2026</span><span class="tip-genre">Sim Racing</span></div></div></td>
+<td class="cg0 past"></td><td class="cg0 past"></td><td class="cg0 past"></td>
+<!-- W5 vide / W6 : RIDE 6 (12 fév) -->
+<td class="cg0 past"></td>
+<td class="cg past"><div class="chip"><img class="chip-img" src="https://cdn.akamai.steamstatic.com/steam/apps/3310150/header.jpg" onerror="this.style.display='none';this.nextSibling.style.display='flex'" alt="RIDE 6"><div class="chip-fallback" style="display:none">RIDE 6</div><div class="plats"><span class="plat">PC</span><span class="plat">PS5</span><span class="plat">XSX</span></div><div class="chip-date">12 fév</div><div class="tip"><span class="tip-title">RIDE 6</span><span class="tip-date">12 février 2026</span><span class="tip-desc">Référence moto simulation : 300+ motos, nouveaux modes, ambiance festival open world.</span><span class="tip-plat">PC · PS5 · Xbox Series X/S</span><span class="tip-genre">Sim Racing — Moto</span></div></div></td>
+<!-- W7 : Tokyo Xtreme PS5 (25 fév) -->
+<td class="cg past"><div class="chip"><div class="chip-fallback">TOKYO XTREME RACER</div><div class="plats"><span class="plat">PS5</span></div><div class="chip-date">25 fév</div><div class="tip"><span class="tip-title">Tokyo Xtreme Racer</span><span class="tip-date">25 février 2026 (PS5)</span><span class="tip-desc">Street racing nocturne sur les autoroutes surélevées de Tokyo. L'esprit des 90s réinventé.</span><span class="tip-plat">PS5</span><span class="tip-genre">Arcade Racing</span></div></div></td>
+<td class="cg0 past"></td>
+<!-- W9-W10 vide / W11 : Screamer (26 mar) -->
+<td class="cg0 past"></td><td class="cg0 past"></td>
+<td class="cg past"><div class="chip"><div class="chip-fallback">SCREAMER</div><div class="plats"><span class="plat">PC</span><span class="plat">PS5</span><span class="plat">XSX</span></div><div class="chip-date">26 mar</div><div class="tip"><span class="tip-title">Screamer</span><span class="tip-date">26 mars 2026</span><span class="tip-desc">Reboot du racer arcade des 90s. Esthétique animée, conduite twin-stick driftée.</span><span class="tip-plat">PC · PS5 · Xbox Series X/S</span><span class="tip-genre">Arcade Racing</span></div></div></td>
+<td class="cg0 past"></td>
+<!-- W13 / W14 : Bus Bound (30 avr) -->
+<td class="cg0 past"></td>
+<td class="cg past"><div class="chip"><div class="chip-fallback">BUS BOUND</div><div class="plats"><span class="plat">PC</span><span class="plat">PS5</span></div><div class="chip-date">30 avr</div><div class="tip"><span class="tip-title">Bus Bound</span><span class="tip-date">30 avril 2026</span><span class="tip-desc">Simulateur de conduite de bus urbain. Gérez vos lignes, horaires et passagers.</span><span class="tip-plat">PC · PS5 · Xbox Series X/S</span><span class="tip-genre">Simulation</span></div></div></td>
+<td class="cg0 past"></td><td class="cg0 past"></td>
+<!-- W17-W18 vide -->
+<td class="cg0"></td><td class="cg0"></td>
+<!-- W19 : Forza Horizon 6 (19 mai) -->
+<td class="cg"><div class="chip"><img class="chip-img" src="https://cdn.akamai.steamstatic.com/steam/apps/2906540/header.jpg" onerror="this.style.display='none';this.nextSibling.style.display='flex'" alt="FH6"><div class="chip-fallback" style="display:none">FORZA<br>HORIZON 6</div><div class="plats"><span class="plat">PC</span><span class="plat">PS5</span><span class="plat">XSX</span></div><div class="chip-date">19 mai</div><div class="tip"><span class="tip-title">Forza Horizon 6</span><span class="tip-date">19 mai 2026 (EA : 15 mai)</span><span class="tip-desc">Open world au Japon. Tokyo la nuit, cols de Gunma à l'aube. Le rêve JDM enfin exaucé.</span><span class="tip-plat">PC · PS5 · Xbox Series X/S</span><span class="tip-genre">Arcade Racing</span></div></div></td>
+<!-- W20 : F1 25 (22 mai) -->
+<td class="cg"><div class="chip"><img class="chip-img" src="https://cdn.akamai.steamstatic.com/steam/apps/3317890/header.jpg" onerror="this.style.display='none';this.nextSibling.style.display='flex'" alt="F1 25"><div class="chip-fallback" style="display:none">F1 25</div><div class="plats"><span class="plat">PC</span><span class="plat">PS5</span><span class="plat">XSX</span></div><div class="chip-date">22 mai</div><div class="tip"><span class="tip-title">F1 25</span><span class="tip-date">22 mai 2026</span><span class="tip-desc">Simulation officielle Formule 1. Nouveau moteur, physique affinée, carrière enrichie.</span><span class="tip-plat">PC · PS5 · Xbox Series X/S</span><span class="tip-genre">Sim Racing</span></div></div></td>
+<!-- W21-W23 vide -->
+<td class="cg0"></td><td class="cg0"></td><td class="cg0"></td>
+<!-- W24 : Wreckfest 2 (été) -->
+<td class="cg"><div class="chip"><img class="chip-img" src="https://cdn.akamai.steamstatic.com/steam/apps/2246880/header.jpg" onerror="this.style.display='none';this.nextSibling.style.display='flex'" alt="WF2"><div class="chip-fallback" style="display:none">WRECKFEST 2</div><div class="plats"><span class="plat">PC</span><span class="plat">PS5</span><span class="plat">XSX</span></div><div class="chip-date">Été</div><div class="tip"><span class="tip-title">Wreckfest 2</span><span class="tip-date">Été 2026 (v1.0)</span><span class="tip-desc">Le roi du demolition derby revient. Destructions spectaculaires, autos customisables, multi endiablé.</span><span class="tip-plat">PC · PS5 · Xbox Series X/S</span><span class="tip-genre">Arcade Racing</span></div></div></td>
+<!-- W25-W31 vide -->
+<td class="cg0"></td><td class="cg0"></td><td class="cg0"></td><td class="cg0"></td>
+<td class="cg0"></td><td class="cg0"></td><td class="cg0"></td>
+<!-- W32-W33 vide -->
+<td class="cg0"></td><td class="cg0"></td>
+<!-- W34 : Star Wars Galactic Racer (TBA) -->
+<td class="cg"><div class="chip tl"><img class="chip-img" src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2993540/header.jpg" onerror="this.style.display='none';this.nextSibling.style.display='flex'" alt="SW Racer"><div class="chip-fallback" style="display:none">SW GALACTIC RACER</div><div class="plats"><span class="plat">PC</span><span class="plat">PS5</span><span class="plat">XSX</span></div><div class="chip-date">TBA</div><div class="tip"><span class="tip-title">Star Wars: Galactic Racer</span><span class="tip-date">2026 — date TBA</span><span class="tip-desc">Pod-racing dans l'Outer Rim. Ligues clandestines, véhicules iconiques, campagne solo.</span><span class="tip-plat">PC · PS5 · Xbox Series X/S</span><span class="tip-genre">Arcade Racing · Sci-Fi</span></div></div></td>
+<!-- W35-W37 vide -->
+<td class="cg0"></td><td class="cg0"></td><td class="cg0"></td>
+<!-- W38 : Ace Combat 8 (TBA) -->
+<td class="cg"><div class="chip tl"><img class="chip-img" src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2288340/header.jpg" onerror="this.style.display='none';this.nextSibling.style.display='flex'" alt="AC8"><div class="chip-fallback" style="display:none">ACE COMBAT 8</div><div class="plats"><span class="plat">PC</span><span class="plat">PS5</span><span class="plat">XSX</span></div><div class="chip-date">TBA</div><div class="tip"><span class="tip-title">Ace Combat 8: Wings of Theve</span><span class="tip-date">2026 — date TBA</span><span class="tip-desc">Premier Ace Combat sur Unreal Engine 5. Combats aériens intenses, porte-avions, campagne scénarisée.</span><span class="tip-plat">PC · PS5 · Xbox Series X/S</span><span class="tip-genre">Aviation / Combat</span></div></div></td>
+<!-- W39-W50 vide -->
+<td class="cg0"></td><td class="cg0"></td><td class="cg0"></td><td class="cg0"></td>
+<td class="cg0"></td><td class="cg0"></td><td class="cg0"></td><td class="cg0"></td>
+<td class="cg0"></td><td class="cg0"></td><td class="cg0"></td>
+<td class="cg0"></td><td class="cg0"></td>
 </tr>
 
-<!-- LIGNE 4 : KEY EVENTS SIM RACING & FLYING -->
+<!-- ═══ KEY EVENTS ═══ -->
 <tr>
-  <td class="row-label">KEY EVENTS<br><span style="font-size:8px;font-weight:400;opacity:0.8">Sim Racing<br>& Flying</span></td>
-  <td class="cell-empty-event"></td>
-  <td class="cell-empty-event"></td>
-  <td class="cell-empty-event"></td>
-  <td class="cell-empty-event"></td>
-  <td class="cell-empty-event"></td>
-  <td class="cell-empty-event"></td>
-  <td class="cell-event">
-    <div class="event-box">SIM EXPO<br><span class="event-sub">Charlotte, NC<br>20–22 mai</span></div>
-  </td>
-  <td class="cell-empty-event"></td>
-  <td class="cell-empty-event"></td>
-  <td class="cell-empty-event"></td>
-  <td class="cell-empty-event"></td>
-  <td class="cell-event">
-    <div class="event-box">FSExpo<br><span class="event-sub">Las Vegas<br>19–21 juin</span></div>
-  </td>
-  <td class="cell-empty-event"></td>
+<td class="rl">KEY EVENTS<span>Sim &amp; Flying</span></td>
+<td class="ce0 past"></td><td class="ce0 past"></td><td class="ce0 past"></td><td class="ce0 past"></td>
+<td class="ce0 past"></td><td class="ce0 past"></td><td class="ce0 past"></td><td class="ce0 past"></td>
+<!-- W9 : FlightSim Fest NL (7 mar) -->
+<td class="ce past"><div class="ev">FlightSim<br>Fest NL</div><div class="evs">7–8 mar</div></td>
+<td class="ce0 past"></td><td class="ce0 past"></td><td class="ce0 past"></td>
+<td class="ce0 past"></td><td class="ce0 past"></td><td class="ce0 past"></td><td class="ce0 past"></td>
+<td class="ce0"></td><td class="ce0"></td><td class="ce0"></td>
+<!-- W20 : SIM EXPO Charlotte -->
+<td class="ce"><div class="ev">SIM EXPO</div><div class="evs">Charlotte<br>20–22 mai</div></td>
+<td class="ce0"></td><td class="ce0"></td><td class="ce0"></td>
+<!-- W24 : FSExpo Las Vegas -->
+<td class="ce"><div class="ev">FSExpo</div><div class="evs">Las Vegas<br>19–21 jun</div></td>
+<td class="ce0"></td><td class="ce0"></td><td class="ce0"></td><td class="ce0"></td>
+<td class="ce0"></td><td class="ce0"></td>
+<!-- W31 : Gamescom -->
+<td class="ce"><div class="ev">Gamescom</div><div class="evs">Cologne<br>26–30 aoû</div></td>
+<td class="ce0"></td><td class="ce0"></td><td class="ce0"></td><td class="ce0"></td>
+<td class="ce0"></td><td class="ce0"></td><td class="ce0"></td><td class="ce0"></td>
+<td class="ce0"></td><td class="ce0"></td><td class="ce0"></td><td class="ce0"></td>
+<td class="ce0"></td>
+<!-- W45 : SimRacing Expo Cologne -->
+<td class="ce"><div class="ev">SimRacing<br>Expo</div><div class="evs">Cologne<br>nov</div></td>
+<td class="ce0"></td><td class="ce0"></td>
+<td class="ce0"></td><td class="ce0"></td><td class="ce0"></td>
 </tr>
 
-<!-- LIGNE 5 : F1 -->
+<!-- ═══ F1 ═══ -->
 <tr>
-  <td class="row-label" style="background:#c0001f;border-right:2px solid #ff3355">
-    <span style="display:flex;align-items:center;justify-content:center;gap:3px">
-      <span style="font-size:13px">F1</span>
-    </span>
-  </td>
-  <td class="cell-empty-f1"></td>
-  <td class="cell-f1"><div class="race-item"><b>GP Bahreïn</b><br>11 avr.</div></td>
-  <td class="cell-f1"><div class="race-item"><b>GP Arabie S.</b><br>17 avr. (Jeddah)</div></td>
-  <td class="cell-empty-f1"></td>
-  <td class="cell-empty-f1"></td>
-  <td class="cell-f1"><div class="race-item"><b>GP Miami</b><br>01 mai</div></td>
-  <td class="cell-empty-f1"></td>
-  <td class="cell-f1"><div class="race-item"><b>GP Canada</b><br>22 mai (Montréal)</div></td>
-  <td class="cell-empty-f1"></td>
-  <td class="cell-f1"><div class="race-item"><b>GP Monaco</b><br>05 juin</div></td>
-  <td class="cell-f1"><div class="race-item"><b>GP Espagne</b><br>12 juin (Barcelone)</div></td>
-  <td class="cell-empty-f1"></td>
-  <td class="cell-f1"><div class="race-item"><b>GP Autriche</b><br>26 juin</div></td>
+<td class="rl" style="background:#b00018;color:#fff;font-size:12px;font-weight:700">F1</td>
+<td class="cf0 past"></td><td class="cf0 past"></td><td class="cf0 past"></td><td class="cf0 past"></td>
+<td class="cf0 past"></td><td class="cf0 past"></td><td class="cf0 past"></td><td class="cf0 past"></td>
+<!-- W9 : Australie 8 mar -->
+<td class="cf past"><div class="ri"><b>Australie</b><br>8 mar</div></td>
+<!-- W10 : Chine 15 mar -->
+<td class="cf past"><div class="ri"><b>Chine</b><br>15 mar</div></td>
+<td class="cf0 past"></td>
+<!-- W12 : Japon 29 mar -->
+<td class="cf past"><div class="ri"><b>Japon</b><br>29 mar</div></td>
+<td class="cf0 past"></td>
+<!-- W14 : Bahreïn 12 avr -->
+<td class="cf past"><div class="ri"><b>Bahreïn</b><br>12 avr</div></td>
+<!-- W15 : Arabie S. 19 avr -->
+<td class="cf past"><div class="ri"><b>Arabie S.</b><br>19 avr</div></td>
+<td class="cf0 past"></td>
+<td class="cf0"></td>
+<!-- W18 : Miami 3 mai -->
+<td class="cf"><div class="ri"><b>Miami</b><br>3 mai</div></td>
+<td class="cf0"></td>
+<!-- W20 : Canada 24 mai -->
+<td class="cf"><div class="ri"><b>Canada</b><br>24 mai</div></td>
+<td class="cf0"></td>
+<!-- W22 : Monaco 7 jun -->
+<td class="cf"><div class="ri"><b>Monaco</b><br>7 jun</div></td>
+<!-- W23 : Barcelone 14 jun -->
+<td class="cf"><div class="ri"><b>Barcelone</b><br>14 jun</div></td>
+<td class="cf0"></td>
+<!-- W25 : Autriche 28 jun -->
+<td class="cf"><div class="ri"><b>Autriche</b><br>28 jun</div></td>
+<!-- W26 : G-Bretagne 5 jul -->
+<td class="cf"><div class="ri"><b>G-Bretagne</b><br>5 jul</div></td>
+<td class="cf0"></td>
+<!-- W28 : Belgique 19 jul -->
+<td class="cf"><div class="ri"><b>Belgique</b><br>19 jul</div></td>
+<!-- W29 : Hongrie 26 jul -->
+<td class="cf"><div class="ri"><b>Hongrie</b><br>26 jul</div></td>
+<td class="cf0"></td><td class="cf0"></td>
+<!-- W31-W32 vide / W32: Pays-Bas 23 aoû-->
+<td class="cf0"></td>
+<td class="cf0"></td>
+<!-- W33 : Pays-Bas 23 aoû -->
+<td class="cf"><div class="ri"><b>Pays-Bas</b><br>23 aoû</div></td>
+<td class="cf0"></td>
+<!-- W35 : Italie 6 sep -->
+<td class="cf"><div class="ri"><b>Italie</b><br>6 sep</div></td>
+<!-- W36 : Madrid 13 sep -->
+<td class="cf"><div class="ri"><b>Madrid</b><br>13 sep</div></td>
+<td class="cf0"></td>
+<!-- W38 : Azerbaïdjan 26 sep -->
+<td class="cf"><div class="ri"><b>Azerbaïdjan</b><br>26 sep</div></td>
+<td class="cf0"></td>
+<!-- W40 : Singapour 11 oct -->
+<td class="cf"><div class="ri"><b>Singapour</b><br>11 oct</div></td>
+<td class="cf0"></td>
+<!-- W42 : Austin 25 oct -->
+<td class="cf"><div class="ri"><b>Austin</b><br>25 oct</div></td>
+<!-- W43 : Mexique 1 nov -->
+<td class="cf"><div class="ri"><b>Mexique</b><br>1 nov</div></td>
+<!-- W44 : Brésil 8 nov -->
+<td class="cf"><div class="ri"><b>Brésil</b><br>8 nov</div></td>
+<td class="cf0"></td>
+<!-- W46 : Las Vegas 21 nov -->
+<td class="cf"><div class="ri"><b>Las Vegas</b><br>21 nov</div></td>
+<!-- W47 : Qatar 29 nov -->
+<td class="cf"><div class="ri"><b>Qatar</b><br>29 nov</div></td>
+<td class="cf0"></td>
+<!-- W49 : Abu Dhabi 6 déc -->
+<td class="cf0"></td>
+<td class="cf"><div class="ri"><b>Abu Dhabi</b><br>6 déc</div></td>
+<td class="cf0"></td>
 </tr>
 
-<!-- LIGNE 6 : WEC -->
+<!-- ═══ WEC ═══ -->
 <tr>
-  <td class="row-label" style="background:#001f3d;border-right:2px solid #0055aa">
-    <span style="color:#4da6ff;font-size:11px;font-weight:700">WEC</span>
-  </td>
-  <td class="cell-empty-wec"></td>
-  <td class="cell-wec"><div class="race-item"><b>6h Imola</b><br>18–19 avr.</div></td>
-  <td class="cell-empty-wec"></td>
-  <td class="cell-empty-wec"></td>
-  <td class="cell-wec"><div class="race-item"><b>6h Spa</b><br>08–09 mai</div></td>
-  <td class="cell-empty-wec"></td>
-  <td class="cell-empty-wec"></td>
-  <td class="cell-empty-wec"></td>
-  <td class="cell-empty-wec"></td>
-  <td class="cell-wec"><div class="race-item"><b>24h du Mans</b><br>13–14 juin</div></td>
-  <td class="cell-empty-wec"></td>
-  <td class="cell-empty-wec"></td>
+<td class="rl" style="background:#1a3a6e;color:#7ab0ff;font-size:12px;font-weight:700">WEC</td>
+<td class="cw0 past"></td><td class="cw0 past"></td><td class="cw0 past"></td><td class="cw0 past"></td>
+<td class="cw0 past"></td><td class="cw0 past"></td><td class="cw0 past"></td><td class="cw0 past"></td>
+<td class="cw0 past"></td><td class="cw0 past"></td><td class="cw0 past"></td><td class="cw0 past"></td>
+<td class="cw0 past"></td>
+<!-- W14 : 6h Imola 19 avr -->
+<td class="cw past"><div class="ri"><b>6h Imola</b><br>19 avr</div></td>
+<td class="cw0 past"></td><td class="cw0 past"></td>
+<td class="cw0"></td>
+<!-- W18 : 6h Spa 9 mai -->
+<td class="cw"><div class="ri"><b>6h Spa</b><br>9 mai</div></td>
+<td class="cw0"></td><td class="cw0"></td><td class="cw0"></td>
+<!-- W22-W23 : 24h Le Mans 13-14 jun -->
+<td class="cw" colspan="2" style="vertical-align:middle;text-align:center"><div class="ri" style="text-align:center"><b>24h Le Mans</b><br>13–14 jun</div></td>
+<td class="cw0"></td><td class="cw0"></td>
+<!-- W26 : 6h São Paulo 12 jul -->
+<td class="cw"><div class="ri"><b>6h São Paulo</b><br>12 jul</div></td>
+<td class="cw0"></td><td class="cw0"></td><td class="cw0"></td>
+<td class="cw0"></td><td class="cw0"></td>
+<!-- W35 : Lone Star Le Mans 6 sep -->
+<td class="cw"><div class="ri"><b>Lone Star LM</b><br>6 sep</div></td>
+<td class="cw0"></td><td class="cw0"></td>
+<!-- W38 : 6h Fuji 27 sep -->
+<td class="cw"><div class="ri"><b>6h Fuji</b><br>27 sep</div></td>
+<td class="cw0"></td>
+<!-- W41 : Qatar 1812km 24 oct -->
+<td class="cw"><div class="ri"><b>Qatar 1812km</b><br>24 oct</div></td>
+<td class="cw0"></td><td class="cw0"></td>
+<td class="cw0"></td>
+<!-- W44 : 8h Bahreïn 7 nov -->
+<td class="cw"><div class="ri"><b>8h Bahreïn</b><br>7 nov</div></td>
+<td class="cw0"></td><td class="cw0"></td>
+<td class="cw0"></td><td class="cw0"></td><td class="cw0"></td>
 </tr>
 
-<!-- LIGNE 7 : WRC -->
+<!-- ═══ WRC ═══ -->
 <tr>
-  <td class="row-label" style="background:#b34700;border-right:2px solid #ff8800">
-    <span style="color:#ffe0b2;font-size:11px;font-weight:700">WRC</span>
-  </td>
-  <td class="cell-empty-wrc"></td>
-  <td class="cell-wrc"><div class="race-item"><b>Rally Croatie</b><br>09 avr.</div></td>
-  <td class="cell-empty-wrc"></td>
-  <td class="cell-wrc"><div class="race-item"><b>Rally Canarias</b><br>23 avr.</div></td>
-  <td class="cell-empty-wrc"></td>
-  <td class="cell-wrc"><div class="race-item"><b>Rally Portugal</b><br>07 mai</div></td>
-  <td class="cell-empty-wrc"></td>
-  <td class="cell-empty-wrc"></td>
-  <td class="cell-wrc"><div class="race-item"><b>Rally Japon</b><br>28 mai</div></td>
-  <td class="cell-empty-wrc"></td>
-  <td class="cell-empty-wrc"></td>
-  <td class="cell-empty-wrc"></td>
-  <td class="cell-wrc"><div class="race-item"><b>Rally Grèce</b><br>25 juin</div></td>
+<td class="rl" style="background:#b34700;color:#ffe0b2;font-size:12px;font-weight:700">WRC</td>
+<td class="cr0 past"></td>
+<!-- W2 : Monte-Carlo 22 jan -->
+<td class="cr past"><div class="ri"><b>Monte-Carlo</b><br>22–25 jan</div></td>
+<td class="cr0 past"></td><td class="cr0 past"></td>
+<td class="cr0 past"></td>
+<!-- W6 : Suède 12 fév -->
+<td class="cr past"><div class="ri"><b>Suède</b><br>12–15 fév</div></td>
+<td class="cr0 past"></td><td class="cr0 past"></td>
+<td class="cr0 past"></td>
+<!-- W10 : Kenya 12 mar -->
+<td class="cr past"><div class="ri"><b>Kenya</b><br>12–15 mar</div></td>
+<td class="cr0 past"></td><td class="cr0 past"></td>
+<td class="cr0 past"></td>
+<!-- W14 : Croatie 9 avr -->
+<td class="cr past"><div class="ri"><b>Croatie</b><br>9–12 avr</div></td>
+<!-- W15 : Canarias 23 avr -->
+<td class="cr past"><div class="ri"><b>Canarias</b><br>23–26 avr</div></td>
+<td class="cr0 past"></td>
+<td class="cr0"></td>
+<!-- W18 : Portugal 7 mai -->
+<td class="cr"><div class="ri"><b>Portugal</b><br>7–10 mai</div></td>
+<td class="cr0"></td><td class="cr0"></td>
+<!-- W20 : Japon 28 mai -->
+<td class="cr"><div class="ri"><b>Japon</b><br>28–31 mai</div></td>
+<td class="cr0"></td><td class="cr0"></td><td class="cr0"></td>
+<!-- W24 : Grèce 25 jun -->
+<td class="cr"><div class="ri"><b>Grèce</b><br>25–28 jun</div></td>
+<td class="cr0"></td>
+<!-- W26 : Estonie 16 jul -->
+<td class="cr"><div class="ri"><b>Estonie</b><br>16–19 jul</div></td>
+<td class="cr0"></td>
+<!-- W28 : Finlande 30 jul -->
+<td class="cr"><div class="ri"><b>Finlande</b><br>30 jul</div></td>
+<td class="cr0"></td><td class="cr0"></td>
+<!-- W31 : Paraguay 27 aoû -->
+<td class="cr"><div class="ri"><b>Paraguay</b><br>27–30 aoû</div></td>
+<td class="cr0"></td>
+<!-- W33 : Chili 10 sep -->
+<td class="cr"><div class="ri"><b>Chili</b><br>10–13 sep</div></td>
+<td class="cr0"></td><td class="cr0"></td>
+<!-- W36 : Italie 1 oct -->
+<td class="cr"><div class="ri"><b>Italie</b><br>1–4 oct</div></td>
+<td class="cr0"></td><td class="cr0"></td><td class="cr0"></td>
+<td class="cr0"></td>
+<!-- W44 : Arabie Saoudite 12 nov -->
+<td class="cr"><div class="ri"><b>Arabie S.</b><br>12–15 nov</div></td>
+<td class="cr0"></td><td class="cr0"></td>
+<td class="cr0"></td><td class="cr0"></td><td class="cr0"></td>
 </tr>
 
 </tbody>
 </table>
+</div>
 
-<!-- LÉGENDE -->
 <div class="legend">
-  <div class="leg"><div class="leg-dot" style="background:#b8d4f0"></div>Sorties de jeux</div>
-  <div class="leg"><div class="leg-dot" style="background:#5a8fc2"></div>Événements sim racing / flying</div>
-  <div class="leg"><div class="leg-dot" style="background:#e8002d"></div>Formule 1</div>
-  <div class="leg"><div class="leg-dot" style="background:#00294d"></div>WEC</div>
-  <div class="leg"><div class="leg-dot" style="background:#ff6600"></div>WRC</div>
-  <div style="margin-left:auto;font-size:11px;color:#888;font-style:italic">Survolez un jeu pour les détails</div>
+  <div class="leg"><div class="ld" style="background:#f0f4fa;border:1px solid #ccc"></div>Sorties de jeux</div>
+  <div class="leg"><div class="ld" style="background:#e8f0fa;border:1px solid #ccc"></div>Événements sim / flying</div>
+  <div class="leg"><div class="ld" style="background:#fff5f5;border:1px solid #ccc"></div>Formule 1</div>
+  <div class="leg"><div class="ld" style="background:#f0f4ff;border:1px solid #ccc"></div>WEC Endurance</div>
+  <div class="leg"><div class="ld" style="background:#fff8f0;border:1px solid #ccc"></div>WRC Rallye</div>
+  <div class="leg"><div class="ld" style="background:#eee;border:1px solid #ccc;opacity:0.6"></div>Passé</div>
+  <div class="leg-hint">Survolez un jeu pour les détails</div>
 </div>
-</div>
-<!-- FIN CALENDRIER RACING & AVIATION 2026 -->
+
+</body>
+</html>
